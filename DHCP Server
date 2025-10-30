@@ -1,0 +1,75 @@
+ROUTER
+  en
+    config t
+      no ip domain lookup
+      service password-encryption
+      enable secret pass
+      user admin privilege 15 secret pass
+      line con 0
+        logging sync
+        login
+        exec 0 0
+        end
+      line vty 0 4
+        logging sync
+        login local
+        exec 5 0
+        end
+      service dhcp
+      ip dhcp pool PRIMARY
+        network 192.168.1.0 255.255.255.0
+        default 192.168.1.1
+        domain-name www.website1.com
+      ip dhcp pool SECONDARY
+        network 192.168.2.0 255.255.255.0
+        default 192.168.2.1
+        domain-name www.website2.com
+        end
+      int g1
+        no shut
+        end
+      int g1.1
+        encapsulation dot1q 10
+        ip add 192.168.1.1 255.255.255.0
+        no shut
+        end
+      int g1.2
+        encapsulation dot1q 20
+        ip add 192.168.2.1 255.255.255.0
+        no shut
+        end
+      ip dhcp pool excluded-address 192.168.1.1 192.168.1.100
+      ip dhcp pool excluded-address 192.168.2.1 192.168.2.100
+      show ip int br
+      show ip dhcp binding
+      show ip dhcp pool
+      do wr
+
+SWITCH1
+  en
+    conf t
+    vlan 10
+      name PRIMARY
+      end
+    vlan 20
+      name SECONDARY
+      end
+    int f0/1-12
+      switchport mode access
+      switchport access
+      encapsulation dot1q 10
+      end
+    int f0/13-24
+      switchport mode access
+      switchport access
+      encapsulation dot1q 20
+      end
+    int g1
+      switchport mode trunk
+      switchport trunk
+      end
+    show int trunk
+
+#recappppppppppppppppppppppppppp
+        
+      
