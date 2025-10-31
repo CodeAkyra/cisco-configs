@@ -1,8 +1,0 @@
-Understanding OSPF or Open Shortest Path First
-It is an Interior Gateway Protocol (IGP) that dynamically calculates the most efficient path for data packets to travel across an IP network.
-It is a link-state protocol that uses Dijkstra's algorithm to build a map of the network and determine the shortest path based on a calculated "cost", which is often related to link bandwidth.
-This makes OSPF highly scalable and efficient for use in medium to large networks by ensuring routers have a consistent view of the network topology.
-
-How it works
-  Negihbor Discover: Sends "Hello" packets to discover and maintain relationship with neighbors within the same network
-  Link-State Advertisements (LSAs): 
