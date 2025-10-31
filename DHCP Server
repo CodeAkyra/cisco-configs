@@ -1,4 +1,4 @@
-ROUTER
+ROUTER 1841
   en
     config t
       no ip domain lookup
@@ -7,14 +7,14 @@ ROUTER
       user admin privilege 15 secret pass
       line con 0
         logging sync
-        login
+        login local
         exec 0 0
-        end
+        exit
       line vty 0 4
         logging sync
-        login local
+        login localx  
         exec 5 0
-        end
+        exit
       service dhcp
       ip dhcp pool PRIMARY
         network 192.168.1.0 255.255.255.0
@@ -24,51 +24,68 @@ ROUTER
         network 192.168.2.0 255.255.255.0
         default 192.168.2.1
         domain-name www.website2.com
-        end
-      int g1
+        exit
+      int f0/1  
         no shut
-        end
-      int g1.1
+        exit
+      int f0/1.1
         encapsulation dot1q 10
         ip add 192.168.1.1 255.255.255.0
         no shut
-        end
-      int g1.2
+        exit
+      int f0/1.2
         encapsulation dot1q 20
         ip add 192.168.2.1 255.255.255.0
         no shut
-        end
-      ip dhcp pool excluded-address 192.168.1.1 192.168.1.100
-      ip dhcp pool excluded-address 192.168.2.1 192.168.2.100
+        exit
+      ip dhcp excluded-address 192.168.1.1 192.168.1.100
+      ip dhcp excluded-address 192.168.2.1 192.168.2.100
       show ip int br
       show ip dhcp binding
       show ip dhcp pool
       do wr
 
-SWITCH1
+SWITCH1 2960-24TT
   en
     conf t
+    no ip domain lookup
+    enable secret pass
+    user admin privilege 15 secret pass
+    line con 0
+      logging sync
+      login local
+      exec 0 0
+      exit
+    line vty 0 4
+      logging sync
+      login local
+      exec  5 0
+      exit
     vlan 10
       name PRIMARY
-      end
+      exit
     vlan 20
       name SECONDARY
-      end
-    int f0/1-12
+      exit
+    do sh vlan br
+    int range f0/1-12
       switchport mode access
-      switchport access
-      encapsulation dot1q 10
-      end
-    int f0/13-24
+      switchport access vlan 10
+      exit
+    int range f0/13-24
       switchport mode access
-      switchport access
-      encapsulation dot1q 20
-      end
-    int g1
+      switchport access vlan 20
+    do sh vlan br
+    int g0/1
       switchport mode trunk
-      switchport trunk
-      end
-    show int trunk
+      exit
+    do sh int trunk
+
+connect PC1 to SWITCH1 port 1
+connect PC2 to SWITCH1 port 13
+
+configure PC1 and PC2 network settings to DHCP
+    
 
 #recappppppppppppppppppppppppppp
         
