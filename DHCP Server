@@ -1,6 +1,7 @@
-ROUTER 1841
+! ROUTER 1841
   en
     config t
+      hostname R1841
       no ip domain lookup
       service password-encryption
       enable secret pass
@@ -12,7 +13,7 @@ ROUTER 1841
         exit
       line vty 0 4
         logging sync
-        login localx  
+        login local
         exec 5 0
         exit
       service dhcp
@@ -40,14 +41,15 @@ ROUTER 1841
         exit
       ip dhcp excluded-address 192.168.1.1 192.168.1.100
       ip dhcp excluded-address 192.168.2.1 192.168.2.100
-      show ip int br
-      show ip dhcp binding
-      show ip dhcp pool
+      do show ip int br
+      do show ip dhcp binding
+      do show ip dhcp pool
       do wr
 
-SWITCH1 2960-24TT
+! SWITCH1 2960-24TT
   en
     conf t
+    hostname S2960-24
     no ip domain lookup
     enable secret pass
     user admin privilege 15 secret pass
@@ -85,8 +87,5 @@ connect PC1 to SWITCH1 port 1
 connect PC2 to SWITCH1 port 13
 
 configure PC1 and PC2 network settings to DHCP
-    
 
-#recappppppppppppppppppppppppppp
-        
       
