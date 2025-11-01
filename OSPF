@@ -25,7 +25,7 @@ BASIC SETUP CONFIGURATION
 
 !R2-1841
   en
-    conf t
+    config t
       hostname R2-1841
       no ip domain lookup
       user admin privilege 15 secret pass
@@ -43,7 +43,7 @@ BASIC SETUP CONFIGURATION
 
 !R3-1841
   en
-    conf t
+    config t
       hostname R3-1841
       no ip domain lookup
       user admin privilege 15 secret pass
@@ -79,7 +79,7 @@ BASIC SETUP CONFIGURATION
 
 !R5-1841
   en
-    conf t
+    config t
       hostname R5-1841
       no ip domain lookup
       user admin privilege 15 secret pass
