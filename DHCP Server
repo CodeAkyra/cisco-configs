@@ -2,6 +2,9 @@
   en
     config t
       hostname R1841
+      ip domain-name R1841
+      crypto key generate rsa
+        2048
       no ip domain lookup
       service password-encryption
       enable secret pass
