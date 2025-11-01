@@ -2,7 +2,7 @@
 MODULES:
   + HWIC-2T - Cisco 2-Port Serial High-Speed WAN Interface Card
 
-
+#####################################################################################
 BASIC SETUP CONFIGURATION
 
 !R1-1841
@@ -94,3 +94,51 @@ BASIC SETUP CONFIGURATION
         no shut
         exit
       do sh ip int br
+
+#####################################################################################
+OSPF CONFIGURATION
+
+R1-1841
+  en
+    config t
+    ! check mo ip address
+    do sh ip int br
+    ![process ID = 1000] wala siyang impact sa config or hindi required na same ang process id sa ibang routers
+    router ospf 1000
+      network 10.10.10.0 0.0.0.255 area 0 
+      network 50.50.50.0 0.0.0.255 area 0
+      exit
+
+R2-1841
+  en
+    config t
+      router ospf 1000
+        network 20.20.20.0 0.0.0.255 area 0
+        network 10.10.10.0 0.0.0.255 area 0
+        exit
+
+R3-1841
+  en
+    config t
+      router ospf 1000
+        network 30.30.30.0 0.0.0.255 area 0
+        network 20.20.20.0 0.0.0.255 area 0
+        exit
+
+R4-1841
+  en
+    config t
+      router ospf 1000
+        network 40.40.40.0 0.0.0.255 area 0
+        network 30.30.30.0 0.0.0.255 area 0
+        exit
+
+R5-1841
+  en
+    config t
+      router ospf 1000
+        network 50.50.50.0 0.0.0.255 area 0
+        network 40.40.40.0 0.0.0.255 area 0
+        exit
+
+!try sending icmp sa mga routers
