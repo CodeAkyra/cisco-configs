@@ -3,3 +3,13 @@ MODULES:
   + HWIC-2T - Cisco 2-Port Serial High-Speed WAN Interface Card
 
 
+CONFIGURATION
+
+en
+  config t
+    hostname R1-1841
+    no ip domain lookup
+    user admin privilege 15 secret pass
+    service password-encryption
+    
+    
