@@ -3,13 +3,94 @@ MODULES:
   + HWIC-2T - Cisco 2-Port Serial High-Speed WAN Interface Card
 
 
-CONFIGURATION
+BASIC SETUP CONFIGURATION
 
-en
-  config t
-    hostname R1-1841
-    no ip domain lookup
-    user admin privilege 15 secret pass
-    service password-encryption
-    
-    
+!R1-1841
+  en
+    config t
+      hostname R1-1841
+      no ip domain lookup
+      user admin privilege 15 secret pass
+      service password-encryption
+      enable secret pass
+      int s0/1/0
+        ip add 10.10.10.1 255.255.255.0
+        no shut
+        exit
+      int s0/1/1
+        ip add 50.50.50.2 255.255.255.0
+        no shut
+        exit
+      do sh ip int br
+
+!R2-1841
+  en
+    conf t
+      hostname R2-1841
+      no ip domain lookup
+      user admin privilege 15 secret pass
+      service password-encryption
+      enable secret pass
+      int s0/1/1
+        ip add 10.10.10.2 255.255.255.0
+        no shut
+        exit
+      int s0/1/0
+        ip add 20.20.20.1 255.255.255.0
+        no shut
+        exit
+      do sh ip int br
+
+!R3-1841
+  en
+    conf t
+      hostname R3-1841
+      no ip domain lookup
+      user admin privilege 15 secret pass
+      service password-encryption
+      enable secret pass
+      int s0/1/1
+        ip add 20.20.20.2 255.255.255.0
+        no shut
+        exit
+      int s0/1/0
+        ip add 30.30.30.1 255.255.255.0
+        no shut
+        exit
+      do sh ip int br
+
+!R4-1841
+  en
+    conf t
+      hostname R4-1841
+      no ip domain lookup
+      user admin privilege 15 secret pass
+      service password-encryption
+      enable secret pass
+      int s0/1/1
+        ip add 30.30.30.2 255.255.255.0
+        no shut
+        exit
+      int s0/1/0
+        ip add 40.40.40.1 255.255.255.0
+        no shut
+        exit
+      do sh ip int br
+
+!R5-1841
+  en
+    conf t
+      hostname R5-1841
+      no ip domain lookup
+      user admin privilege 15 secret pass
+      service password-encryption
+      enable secret pass
+      int s0/1/1
+        ip add 40.40.40.2 255.255.255.0
+        no shut
+        exit
+      int s0/1/0
+        ip add 50.50.50.1 255.255.255.0
+        no shut
+        exit
+      do sh ip int br
