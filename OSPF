@@ -142,3 +142,23 @@ R5-1841
         exit
 
 !try sending icmp sa mga routers
+
+#####################################################################################
+
+#review of used commands
+en/enable - from user to privileged mode
+config t/configure terminal - to configure terminal
+hostname - to change yung current name ng device from "Router>" to "R1-1841>"
+user admin privilege 15 secret pass - to create a user named "admin" with privilege mode since naka set sa 15 and "secret" is actually password but encrypted siya
+service password-encryption - if yung user hindi gumamit ng "secret", just regular "password" and the service is enabled, mag eencrypt yung mga password. once encrypted, stays encrypted.
+enable secret pass - for security purposes, adding password sa privilege mode na naka encrypt din
+int (interface) - configuring specific network interface
+ip add (ip address) (subnetmask) - assigning ip address and subnetmask to that specific network interface or port
+no shut - turn on a specific port
+exit - exit that specific configuration interface????
+do show ip interface brief - bried summary of ip status and configuration
+router ospf (process id) - enable a routing process which ang ginamit is open shortest path first, for the process ID, di siya nag mamatter
+network (ip address) (wildcard) area (area ID) - the ip address is the network address or a host address within the network you want to include in ospf, wildcard mask determines which bits of the ip address must match to enable ospf on an interface
+
+
+in OSPF, as long as the router is in the same area with other routers, they know the whole map. same area must have the same identical LSDB or Link-State Database, lahat ng router meron nan na naka store sa local database or sa RAM
