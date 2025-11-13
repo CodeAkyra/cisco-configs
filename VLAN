@@ -1,0 +1,5 @@
+!R1841
+  en
+    conf t
+      no ip domain-lookup
+      
